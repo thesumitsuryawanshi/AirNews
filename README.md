@@ -1,5 +1,6 @@
 # AirNews
 
 
-![front pic](https://user-images.githubusercontent.com/58788722/137463724-7ef90a38-1636-4d38-8c05-bca1845f2912.jpg)
-![FotoJet (2)](https://user-images.githubusercontent.com/58788722/137466014-f7518335-56be-4a8a-a57e-818ae01e9e83.jpg)
+![news1](https://user-images.githubusercontent.com/58788722/137470591-88a9d482-bcf6-4af0-bcf2-50c0a36bfe3a.jpg)
+
+![news2](https://user-images.githubusercontent.com/58788722/137470534-169be34c-6797-41db-9fe9-38c698c13075.jpg)
