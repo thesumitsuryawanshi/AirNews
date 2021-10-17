@@ -12,6 +12,6 @@
     <!--  my bg colors-->
 
     <color name="splash_scrn_color">#FDFDFD</color>
-    <color name="cardview_bg">#6AF1EBF1</color>
+    <color name="cardview_bg">#59FFFFFF</color>
 
 </resources>
