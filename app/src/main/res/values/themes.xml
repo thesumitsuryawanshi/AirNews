@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.AirNews" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/purple_500</item>\
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Splash_screen_theme" parent="Theme.AppCompat.NoActionBar">
+    <style name="Splash_screen_theme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_img</item>
         <item name="android:statusBarColor">@color/white</item>
     </style>

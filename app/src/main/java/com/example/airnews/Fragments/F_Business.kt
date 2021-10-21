@@ -40,10 +40,12 @@ class F_Business : Fragment(), ItemsCLicked {
         fetchData()
     }
 
-    private fun fetchData() {
+    private fun fetchData()  {
 
         val url =
             "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=11c6dba5e88744338808d830416b0b8f"
+                // https://newsapi.org/v2/top-headlines?q=trump&apiKey=11c6dba5e88744338808d830416b0b8f
+
 
         val jsonObjectRequest =
             object : JsonObjectRequest(Request.Method.GET, url, null, { response ->
