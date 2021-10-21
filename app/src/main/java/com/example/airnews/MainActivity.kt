@@ -83,12 +83,10 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
         val headerview = binding.navDrawer.getHeaderView(0)
         val NavDrawerHeaderViewRef = NavdrawerHeaderLayoutBinding.bind(headerview)
 
-
         NavDrawerHeaderViewRef.btnSearch.setOnClickListener {
 
         }
     }
-
 
     private fun topToolBarItemClicks() {
         binding.topAppToolBar.setOnMenuItemClickListener { menuItem ->
