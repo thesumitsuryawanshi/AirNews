@@ -32,9 +32,6 @@ class F_Technology : Fragment(), ItemsCLicked {
         mAdapter = NewsRvAdapter(this)
         binding.rvNews.adapter = mAdapter
 
-        binding.progressBar.visibility = View.VISIBLE
-        fetchData()
-        binding.progressBar.visibility = View.GONE
     }
     private fun fetchData() {
 

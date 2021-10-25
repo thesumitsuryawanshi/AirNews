@@ -12,8 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Splash_screen_theme">
         <activity
+            android:name=".SecondActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

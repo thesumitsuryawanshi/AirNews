@@ -1,5 +1,6 @@
 package com.example.airnews
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
@@ -84,7 +85,8 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
         val NavDrawerHeaderViewRef = NavdrawerHeaderLayoutBinding.bind(headerview)
 
         NavDrawerHeaderViewRef.btnSearch.setOnClickListener {
-
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -191,4 +193,3 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
     }
 
 }
-
