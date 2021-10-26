@@ -84,9 +84,54 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
         val headerview = binding.navDrawer.getHeaderView(0)
         val NavDrawerHeaderViewRef = NavdrawerHeaderLayoutBinding.bind(headerview)
 
-        NavDrawerHeaderViewRef.btnSearch.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            startActivity(intent)
+        NavDrawerHeaderViewRef.let {
+            it.btnSearch.setOnClickListener {
+                val searchKeyword = NavDrawerHeaderViewRef.etSearchNews.text.toString()
+
+                val i = Intent(this, SecondActivity::class.java)
+                i.putExtra("keyword", searchKeyword)
+                startActivity(i)
+
+            }
+
+            it.chipBitcoin.setOnClickListener {
+                Intent(this, SecondActivity::class.java).also {
+                    it.putExtra("keyword", "bitcoin")
+                    startActivity(it)
+                }
+
+            }
+            it.chipIndia.setOnClickListener {
+                Intent(this, SecondActivity::class.java).also {
+                    it.putExtra("keyword", "India")
+                    startActivity(it)
+                }
+            }
+            it.chipMicrosoft.setOnClickListener {
+                Intent(this, SecondActivity::class.java).also {
+                    it.putExtra("keyword", "microsoft")
+                    startActivity(it)
+                }
+            }
+            it.chipTesla.setOnClickListener {
+                Intent(this, SecondActivity::class.java).also {
+                    it.putExtra("keyword", "tesla")
+                    startActivity(it)
+                }
+            }
+            it.chipModi.setOnClickListener {
+                Intent(this, SecondActivity::class.java).also {
+                    it.putExtra("keyword", "modi")
+                    startActivity(it)
+                }
+            }
+            it.chipGoogle.setOnClickListener {
+                Intent(this, SecondActivity::class.java).also{i->
+                    i.putExtra("keyword","google")
+                    startActivity(i)
+                }
+            }
+
         }
     }
 

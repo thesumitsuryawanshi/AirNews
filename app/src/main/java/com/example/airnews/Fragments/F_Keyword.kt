@@ -3,6 +3,7 @@ package com.example.airnews.Fragments
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +34,7 @@ class F_Keyword(val keyword: String) : Fragment(), ItemsCLicked {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+         d("F-keyword", "fragment opened")
         mAdapter = NewsRvAdapter(this)
         binding.rvNews.adapter = mAdapter
 
@@ -49,6 +50,7 @@ class F_Keyword(val keyword: String) : Fragment(), ItemsCLicked {
 
 
         val jsonObjectRequest =
+
             object : JsonObjectRequest(Request.Method.GET, url, null, { response ->
                 Log.d("test", "its working. \n business news = ${response.getString("status")}")
 

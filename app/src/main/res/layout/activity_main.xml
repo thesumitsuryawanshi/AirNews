@@ -68,8 +68,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/navdrawer_header_layout"
-        app:menu="@menu/btm_navbar_menu"
-
         />
 
 </androidx.drawerlayout.widget.DrawerLayout>

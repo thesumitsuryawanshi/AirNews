@@ -21,4 +21,10 @@
         android:name="com.example.airnews.Fragments.F_Business"
         android:label="fragment_base"
         tools:layout="@layout/fragment_base" />
+    <fragment
+        android:name="com.example.airnews.Fragments.F_Keyword"
+        android:label="fragment_keyword"
+        tools:layout="@layout/fragment_base" />
+
+
 </navigation>

@@ -2,20 +2,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/navDrawerHearLayout"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/img"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/textView"
 
+        app:layout_constraintRight_toLeftOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -38,7 +37,7 @@
         android:layout_margin="7dp"
         android:background="@drawable/bground"
         android:gravity="center"
-        android:hint="Search for news with keyword. \n eg. Tesla  "
+        android:hint="Search for news with keyword. \n eg. Cororna , vaccine , google"
         android:maxLines="2"
         android:minHeight="48dp"
         android:padding="13dp"
@@ -49,7 +48,19 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/btn_search"
         app:layout_constraintTop_toBottomOf="@+id/iv_logo"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.09" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_India"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="#India"
+        app:layout_constraintEnd_toStartOf="@+id/chip_modi"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_searchNews" />
 
     <Button
         android:id="@+id/btn_search"
@@ -63,87 +74,61 @@
         app:layout_constraintLeft_toRightOf="@+id/et_searchNews"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/et_searchNews"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_modi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="#modi"
+        app:layout_constraintEnd_toStartOf="@+id/chip_tesla"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/chip_India"
+        app:layout_constraintTop_toBottomOf="@+id/et_searchNews" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/chip_tesla"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:text="#tesla"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/chip_bbcNews"
-        app:layout_constraintTop_toBottomOf="@+id/chip_microsoft" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_microsoft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="#microsoft"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/chip_elonmusk"
+        app:layout_constraintStart_toEndOf="@+id/chip_modi"
         app:layout_constraintTop_toBottomOf="@+id/et_searchNews" />
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/chip_elonmusk"
+        android:id="@+id/chip_google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="#elonmusk"
-        app:layout_constraintEnd_toStartOf="@+id/chip_microsoft"
+        android:text="#google"
+        app:layout_constraintEnd_toStartOf="@+id/chip_bitcoin"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_searchNews" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_bbcNews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="#BBC news"
-        app:layout_constraintEnd_toStartOf="@+id/chip_tesla"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chip_elonmusk" />
+        app:layout_constraintTop_toBottomOf="@+id/chip_modi" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/chip_bitcoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="#bitcoin"
-        app:layout_constraintEnd_toStartOf="@+id/chip_India"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chip_bbcNews" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_India"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="#India"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/chip_bitcoin"
-        app:layout_constraintTop_toBottomOf="@+id/chip_tesla" />
+        app:layout_constraintStart_toEndOf="@+id/chip_google"
+        app:layout_constraintTop_toBottomOf="@+id/chip_modi" />
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/chip_Techcrunch"
+        android:id="@+id/chip_microsoft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="#techcrunch"
+
+        android:text="#microsoft"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/chip_TOI"
-        app:layout_constraintTop_toBottomOf="@+id/chip_India" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip_TOI"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="#TimesOfIndia"
-        app:layout_constraintEnd_toStartOf="@+id/chip_Techcrunch"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chip_bitcoin" />
+        app:layout_constraintTop_toBottomOf="@+id/chip_google" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
