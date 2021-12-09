@@ -12,9 +12,15 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.example.airnews.ItemsCLicked
 import com.example.airnews.Model.DataModel
+import com.example.airnews.Model.NewsApi
 import com.example.airnews.MySingleton
 import com.example.airnews.NewsRvAdapter
 import com.example.airnews.databinding.FragmentBaseBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class F_Business : Fragment(), ItemsCLicked {
 
@@ -38,13 +44,16 @@ class F_Business : Fragment(), ItemsCLicked {
         binding.rvNews.adapter = mAdapter
 
         fetchData()
+
+
     }
 
-    private fun fetchData()  {
+    private fun fetchData() {
+
 
         val url =
             "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=11c6dba5e88744338808d830416b0b8f"
-                // https://newsapi.org/v2/top-headlines?q=trump&apiKey=11c6dba5e88744338808d830416b0b8f
+        // https://newsapi.org/v2/top-headlines?q=trump&apiKey=11c6dba5e88744338808d830416b0b8f
 
 
         val jsonObjectRequest =
@@ -66,7 +75,7 @@ class F_Business : Fragment(), ItemsCLicked {
                 }
                 mAdapter.upadateNews(newsarray)
             }, { error ->
-                Log.d("test", "couldnt fetch the data ")
+                Log.d("test", "couldnt fetch the data  ")
 
             }) {
 
@@ -79,6 +88,8 @@ class F_Business : Fragment(), ItemsCLicked {
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(requireContext()).addToRequestQueue(jsonObjectRequest)
+
+
     }
 
     override fun ClickedItem(item: DataModel) {
@@ -87,6 +98,5 @@ class F_Business : Fragment(), ItemsCLicked {
             .build()
             .launchUrl(requireContext(), Uri.parse(item.url))
     }
-
 
 }

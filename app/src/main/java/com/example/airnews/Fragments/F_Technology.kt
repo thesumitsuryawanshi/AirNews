@@ -10,8 +10,8 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
-import com.example.airnews.Model.DataModel
 import com.example.airnews.ItemsCLicked
+import com.example.airnews.Model.DataModel
 import com.example.airnews.MySingleton
 import com.example.airnews.NewsRvAdapter
 import com.example.airnews.databinding.FragmentBaseBinding
@@ -22,20 +22,28 @@ class F_Technology : Fragment(), ItemsCLicked {
     lateinit var binding: FragmentBaseBinding
     lateinit var mAdapter: NewsRvAdapter
 
-    override fun onCreateView(inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentBaseBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         mAdapter = NewsRvAdapter(this)
         binding.rvNews.adapter = mAdapter
+        fetchData()
 
     }
+
     private fun fetchData() {
 
-        val url = "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=11c6dba5e88744338808d830416b0b8f"
+        val url =
+            "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=11c6dba5e88744338808d830416b0b8f"
 
         val jsonObjectRequest =
             object : JsonObjectRequest(Request.Method.GET, url, null, { response ->
@@ -70,6 +78,7 @@ class F_Technology : Fragment(), ItemsCLicked {
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(requireContext()).addToRequestQueue(jsonObjectRequest)
     }
+
     override fun ClickedItem(item: DataModel) {
 
         CustomTabsIntent.Builder()

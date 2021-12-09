@@ -37,7 +37,7 @@ class F_Science : Fragment(), ItemsCLicked {
         mAdapter = NewsRvAdapter(this)
         binding.rvNews.adapter = mAdapter
 
-
+        fetchData()
     }
 
     private fun fetchData() {
