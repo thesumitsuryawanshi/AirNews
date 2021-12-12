@@ -2,28 +2,29 @@ package com.example.airnews.Fragments
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
+import androidx.lifecycle.ViewModelProvider
 import com.example.airnews.ItemsCLicked
 import com.example.airnews.Model.DataModel
-import com.example.airnews.Model.NewsApi
-import com.example.airnews.MySingleton
 import com.example.airnews.NewsRvAdapter
 import com.example.airnews.databinding.FragmentBaseBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.airnews.repository.repository
+import com.example.airnews.viewmodel.mainViewModel
+import com.example.airnews.viewmodel.viewModelFactory
+import com.example.trial.Model.DataModel.Article
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class F_Business : Fragment(), ItemsCLicked {
 
+    @Inject
+    lateinit var repository: repository
 
     lateinit var binding: FragmentBaseBinding
     lateinit var mAdapter: NewsRvAdapter
@@ -43,53 +44,42 @@ class F_Business : Fragment(), ItemsCLicked {
         mAdapter = NewsRvAdapter(this)
         binding.rvNews.adapter = mAdapter
 
-        fetchData()
+        val mainViewModel =
+            ViewModelProvider(this, viewModelFactory(repository)).get(mainViewModel::class.java)
 
+        mainViewModel.News.observe(viewLifecycleOwner) {
+            d("B-news status:", it.status)
+
+            val Articles: List<Article> = it.articles
+
+            fetchData(Articles)
+
+        }
 
     }
 
-    private fun fetchData() {
+    private fun fetchData(Articles: List<Article>) {
 
-
-        val url =
-            "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=11c6dba5e88744338808d830416b0b8f"
-        // https://newsapi.org/v2/top-headlines?q=trump&apiKey=11c6dba5e88744338808d830416b0b8f
-
-
-        val jsonObjectRequest =
-            object : JsonObjectRequest(Request.Method.GET, url, null, { response ->
-                Log.d("test", "its working. \n business news = ${response.getString("status")}")
-
-                val newsjsonarray = response.getJSONArray("articles")
-                val newsarray = ArrayList<DataModel>()
-
-                for (i in 0 until newsjsonarray.length()) {
-                    val newsjsonobject = newsjsonarray.getJSONObject(i)
-                    val news = DataModel(
-                        newsjsonobject.getString("title"),
-                        newsjsonobject.getString("author"),
-                        newsjsonobject.getString("url"),
-                        newsjsonobject.getString("urlToImage")
-                    )
-                    newsarray.add(news)
-                }
-                mAdapter.upadateNews(newsarray)
-            }, { error ->
-                Log.d("test", "couldnt fetch the data  ")
-
-            }) {
-
-                override fun getHeaders(): MutableMap<String, String> {
-                    val headers = HashMap<String, String>()
-                    headers["User-Agent"] = "Mozilla/5.0"
-                    return headers
-                }
+        val newsarray = ArrayList<DataModel>()
+        for (i in 0..Articles.size - 1) {
+            if (Articles[i].author == null || Articles[i].urlToImage == null) {
+                Articles[i].author = "Not available"
+                Articles[i].urlToImage = "Not available"
             }
+            d(
+                "testing the business",
+                "check this : ${Articles[i].author}"
+            )
+            val news = DataModel(
+                Articles[i].title,
+                Articles[i].author,
+                Articles[i].url,
+                Articles[i].urlToImage
+            )
 
-        // Access the RequestQueue through your singleton class.
-        MySingleton.getInstance(requireContext()).addToRequestQueue(jsonObjectRequest)
-
-
+            newsarray.add(news)
+            mAdapter.upadateNews(newsarray)
+        }
     }
 
     override fun ClickedItem(item: DataModel) {

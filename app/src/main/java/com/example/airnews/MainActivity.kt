@@ -29,10 +29,16 @@ import com.example.airnews.viewmodel.mainViewModel
 import com.example.airnews.viewmodel.viewModelFactory
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), ItemsCLicked {
+
+    @Inject
+    lateinit var repository: repository
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var appSettingPrefs: SharedPreferences
@@ -62,14 +68,8 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
         topToolBarItemClicks()
 
 
-        val api = Retrofit.Builder()
-            .baseUrl("https://newsapi.org")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(NewsApi::class.java)
 
 
-        val repository = repository(api)
         val mainViewModel =
             ViewModelProvider(this, viewModelFactory(repository)).get(mainViewModel::class.java)
 

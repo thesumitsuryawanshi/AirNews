@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.airnews.Fragments.F_Keyword
 import com.example.airnews.databinding.ActivitySecondBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SecondActivity : AppCompatActivity() {
 
     lateinit var binding: ActivitySecondBinding

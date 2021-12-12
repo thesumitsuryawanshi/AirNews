@@ -2,12 +2,12 @@ package com.example.trial.Model.DataModel
 
 data class
 Article(
-    val author: String,
+    var author: String,
     val content: String,
     val description: String,
     val publishedAt: String,
     val source: Source,
-    val title: String,
-    val url: String,
-    val urlToImage: String
+    var title: String,
+    var url: String,
+    var urlToImage: String
 )
