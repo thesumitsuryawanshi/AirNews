@@ -44,10 +44,17 @@ class F_Business : Fragment(), ItemsCLicked {
         mAdapter = NewsRvAdapter(this)
         binding.rvNews.adapter = mAdapter
 
-        val mainViewModel =
-            ViewModelProvider(this, viewModelFactory(repository)).get(mainViewModel::class.java)
+        val category = "Business"
 
-        mainViewModel.News.observe(viewLifecycleOwner) {
+        val mainViewModel =
+            ViewModelProvider(
+                this,
+                viewModelFactory(repository)
+            ).get(mainViewModel::class.java)
+
+        mainViewModel.getBusinessData(category)
+
+        mainViewModel.BNews.observe(viewLifecycleOwner) {
             d("B-news status:", it.status)
 
             val Articles: List<Article> = it.articles
@@ -55,7 +62,6 @@ class F_Business : Fragment(), ItemsCLicked {
             fetchData(Articles)
 
         }
-
     }
 
     private fun fetchData(Articles: List<Article>) {
@@ -66,10 +72,7 @@ class F_Business : Fragment(), ItemsCLicked {
                 Articles[i].author = "Not available"
                 Articles[i].urlToImage = "Not available"
             }
-            d(
-                "testing the business",
-                "check this : ${Articles[i].author}"
-            )
+
             val news = DataModel(
                 Articles[i].title,
                 Articles[i].author,

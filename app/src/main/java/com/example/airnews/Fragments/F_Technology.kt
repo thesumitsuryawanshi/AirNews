@@ -46,10 +46,16 @@ class F_Technology : Fragment(), ItemsCLicked {
         binding.rvNews.adapter = mAdapter
 
 
-        val mainViewModel =
-            ViewModelProvider(this, viewModelFactory(repository)).get(mainViewModel::class.java)
+        val category = "Technology"
+        val mainViewModel = ViewModelProvider(
+            this,
+            viewModelFactory(repository)
+        ).get(mainViewModel::class.java)
 
-        mainViewModel.News.observe(viewLifecycleOwner) {
+
+        mainViewModel.getTechnologyData(category)
+
+        mainViewModel.TNews.observe(viewLifecycleOwner) {
             Log.d("T-News status:", it.status)
 
             val Articles: List<Article> = it.articles
@@ -71,10 +77,7 @@ class F_Technology : Fragment(), ItemsCLicked {
                 Articles[i].title = "Not available"
 
             }
-            Log.d(
-                "testing the Technology",
-                "check this : ${Articles[i].author}"
-            )
+
             val news = DataModel(
                 Articles[i].title,
                 Articles[i].author,

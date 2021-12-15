@@ -6,6 +6,7 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -37,6 +38,7 @@ class F_Keyword(val keyword: String) : Fragment(), ItemsCLicked {
     ): View? {
         binding = FragmentBaseBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,14 +48,17 @@ class F_Keyword(val keyword: String) : Fragment(), ItemsCLicked {
         binding.rvNews.adapter = mAdapter
 
 
+
+
         val mainViewModel =
             ViewModelProvider(this, viewModelFactory(repository)).get(mainViewModel::class.java)
 
-        mainViewModel.News.observe(viewLifecycleOwner) {
+
+        mainViewModel.getQueryData(keyword)
+        mainViewModel.QNews.observe(viewLifecycleOwner) {
             d("keyword-news status:", it.status)
 
             val Articles: List<Article> = it.articles
-
             fetchData(Articles)
 
         }

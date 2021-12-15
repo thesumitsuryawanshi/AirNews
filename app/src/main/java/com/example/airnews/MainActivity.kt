@@ -68,18 +68,6 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
         topToolBarItemClicks()
 
 
-
-
-        val mainViewModel =
-            ViewModelProvider(this, viewModelFactory(repository)).get(mainViewModel::class.java)
-
-
-        mainViewModel.News.observe(this) {
-            d("newsdata", it.status)
-
-            Toast.makeText(this, it.status, Toast.LENGTH_SHORT).show()
-        }
-
     }
 
     private fun setUpDrawerLayout() {
@@ -212,7 +200,7 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
                 R.id.mi_Exit -> {
                     Toast.makeText(
                         this,
-                        "Bbye, \n  See you soon buddy. \uD83D\uDE03",
+                        "Bbye, \n  See you soon. \uD83D\uDE03",
                         Toast.LENGTH_SHORT
                     )
                         .show()
