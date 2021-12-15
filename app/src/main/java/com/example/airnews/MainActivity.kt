@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log.d
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -15,16 +16,29 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.airnews.Adapters.viewPagerAdapter
 import com.example.airnews.Fragments.F_Business
 import com.example.airnews.Fragments.F_Science
 import com.example.airnews.Fragments.F_Technology
+import com.example.airnews.Model.NewsApi
 import com.example.airnews.databinding.ActivityMainBinding
 import com.example.airnews.databinding.NavdrawerHeaderLayoutBinding
+import com.example.airnews.repository.repository
+import com.example.airnews.viewmodel.mainViewModel
+import com.example.airnews.viewmodel.viewModelFactory
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), ItemsCLicked {
+
+    @Inject
+    lateinit var repository: repository
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var appSettingPrefs: SharedPreferences
@@ -52,6 +66,7 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
         viewPagerInit()
         setUpDrawerLayout()
         topToolBarItemClicks()
+
 
     }
 
@@ -126,8 +141,8 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
                 }
             }
             it.chipGoogle.setOnClickListener {
-                Intent(this, SecondActivity::class.java).also{i->
-                    i.putExtra("keyword","google")
+                Intent(this, SecondActivity::class.java).also { i ->
+                    i.putExtra("keyword", "google")
                     startActivity(i)
                 }
             }
@@ -147,8 +162,8 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
                             "Hello \uD83D\uDC4B , \n " +
                                     "Nice to meet you \uD83D\uDE03 \n\n  " +
                                     "I'm Sumit Suryawanshi. " +
-                                    "A guy who is done" +
-                                    "with his Bachelor of Computer Science degree \n & love to learn new Languages,frameworks. \n\n " +
+                                    "A guy who is done " +
+                                    "with his Bachelor of Computer Science degree & love to learn new Languages,frameworks. \n\n " +
                                     "Working on new projects and honing my programming skills is something Im very passionate about.\uD83D\uDE00" +
                                     "\uD83D\uDCBB\n\n" +
                                     "My current goal is to\n" +
@@ -185,7 +200,7 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
                 R.id.mi_Exit -> {
                     Toast.makeText(
                         this,
-                        "Bbye, \n  See you soon buddy. \uD83D\uDE03",
+                        "Bbye, \n  See you soon. \uD83D\uDE03",
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -198,7 +213,6 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
 
     private fun viewPagerInit() {
 
-
         val tabLayout = binding.tlTabLayout
         val viewpager = binding.vpViewpager
         val tabNamesArray = arrayListOf("Business", "Science", "Tech")
@@ -206,11 +220,9 @@ class MainActivity : AppCompatActivity(), ItemsCLicked {
         val adapter = viewPagerAdapter(fragmentArray, this)
 
         viewpager.adapter = adapter
-
         TabLayoutMediator(tabLayout, viewpager) { tab, position ->
             tab.text = tabNamesArray[position]
         }.attach()
-
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
